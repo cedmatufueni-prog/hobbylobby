@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Today's Top Promotion - $500 Hobby Lobby Discount</title>
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Google Fonts: Inter for UI & Merriweather for the gold serif accent -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serifAccent: ['Merriweather', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Custom ambient background and card glow matching the reference screenshot */
+    body {
+      background-color: #050b07;
+      background-image: 
+        radial-gradient(circle at 50% 28%, rgba(212, 165, 58, 0.14) 0%, rgba(13, 35, 22, 0.45) 35%, rgba(4, 9, 6, 1) 75%),
+        radial-gradient(circle at 20% 10%, rgba(16, 48, 29, 0.35) 0%, transparent 50%);
+      min-height: 100vh;
+    }
+
+    .promo-card-glow {
+      box-shadow: 
+        0 0 55px -5px rgba(234, 179, 8, 0.28),
+        0 20px 40px -15px rgba(0, 0, 0, 0.85);
+    }
+
+    .cta-button {
+      background: linear-gradient(180deg, #dc283b 0%, #c41c2e 100%);
+      box-shadow: 0 4px 15px rgba(220, 40, 59, 0.35);
+      transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .cta-button:hover {
+      filter: brightness(1.07);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(220, 40, 59, 0.5);
+    }
+
+    .cta-button:active {
+      transform: translateY(1px);
+    }
+
+    /* Subtle shimmer on the gift card */
+    .gift-card-shadow {
+      box-shadow: 
+        0 20px 35px -5px rgba(0, 0, 0, 0.75),
+        0 8px 16px -4px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 1),
+        inset 0 -2px 6px rgba(10, 40, 25, 0.08);
+    }
+
+    /* Realistic brushed gold & festive glow animations */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.45; transform: scale(0.92); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+    .bokeh-twinkle-1 { animation: twinkle 3.6s ease-in-out infinite; }
+    .bokeh-twinkle-2 { animation: twinkle 4.4s ease-in-out 1.2s infinite; }
+    .bokeh-twinkle-3 { animation: twinkle 3.1s ease-in-out 2.1s infinite; }
+
+    /* Photorealistic Studio Gift Card Lighting & Shadow */
+    .studio-gift-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f9fbfa 48%, #eef2f0 100%);
+      box-shadow:
+        0 26px 42px -8px rgba(0, 0, 0, 0.88),
+        0 10px 20px -4px rgba(0, 0, 0, 0.72),
+        0 0 0 1px rgba(255, 255, 255, 0.95),
+        inset 0 2px 3px rgba(255, 255, 255, 1),
+        inset 0 -3px 8px rgba(6, 36, 20, 0.14);
+    }
+  </style>
+</head>
+<body class="text-white font-sans antialiased selection:bg-amber-500/30 selection:text-amber-200 flex flex-col justify-between px-4 py-6 sm:py-10">
+
+  <!-- Main Centered Wrapper -->
+  <main class="w-full max-w-[430px] mx-auto my-auto">
+
+    <!-- Top Headline -->
+    <header class="text-center mb-4 sm:mb-5">
+      <h1 class="text-[24px] sm:text-[28px] font-extrabold tracking-tight leading-tight text-white">
+        Today's top <span class="font-serifAccent text-[#f2be49] tracking-wide">PROMOTION</span>
+      </h1>
+    </header>
+
+    <!-- Status Bar above Main Card -->
+    <div class="flex items-center justify-between text-[11px] sm:text-xs text-gray-400 px-1 mb-2">
+      <span class="font-medium text-[#8a9990]">1 offer live</span>
+      <span class="flex items-center gap-1.5 font-medium text-[#9ca89e]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#f2be49] inline-block shadow-[0_0_6px_#f2be49]"></span>
+        Updated today
+      </span>
+    </div>
+
+    <!-- Main Promotion Card -->
+    <section class="rounded-2xl bg-[#0d1912] border border-[#f2be49]/30 overflow-hidden promo-card-glow">
+      
+      <!-- Photorealistic Studio Holiday Banner -->
+      <div class="relative w-full h-60 sm:h-64 bg-[#04110a] overflow-hidden select-none flex items-center justify-center" id="holidayBanner">
+        <!-- High-DPI Photorealistic Procedural Studio Renderer -->
+        <canvas id="holidayCanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+        <!-- Center Tilted Studio Gift Card -->
+        <div class="relative z-10 w-[236px] sm:w-[258px] h-[140px] sm:h-[152px] rounded-xl studio-gift-card transform -rotate-[4.5deg] flex flex-col items-center justify-center px-5 overflow-hidden">
+          <!-- Studio Softbox Specular Reflection -->
+          <div class="absolute -inset-full bg-gradient-to-tr from-transparent via-white/80 to-transparent rotate-12 pointer-events-none"></div>
+          <!-- Subtle Embossed Border -->
+          <div class="absolute inset-[7px] rounded-lg border border-black/[0.06] pointer-events-none"></div>
+
+          <!-- Brand Wordmark -->
+          <div class="relative text-center leading-[0.88] tracking-tight font-black text-[#ec561c] text-[29px] sm:text-[32px] uppercase" style="text-shadow: 0 1px 0 rgba(255,255,255,0.8);">
+            HOBBY<br />LOBBY
+          </div>
+          <!-- Dollar Amount -->
+          <div class="relative mt-1.5 font-serifAccent font-black text-[#083c24] text-[34px] sm:text-[38px] leading-none tracking-tight">
+            $500
+          </div>
+        </div>
+
+        <!-- Foreground Framing Canvas (Pine Needles, Silk Ribbon & Snow Overlapping Card Edges for True 3D Depth) -->
+        <canvas id="holidayForegroundCanvas" class="absolute inset-0 w-full h-full z-20 pointer-events-none"></canvas>
+
+        <!-- Photographic Lens Vignette & Bottom Seamless Fade -->
+        <div class="absolute inset-0 z-30 shadow-[inset_0_0_32px_rgba(0,0,0,0.75)] pointer-events-none"></div>
+        <div class="absolute inset-x-0 bottom-0 z-30 h-9 bg-gradient-to-t from-[#0d1912] via-[#0d1912]/70 to-transparent pointer-events-none"></div>
+      </div>
+
+      <!-- Card Text & Primary CTA -->
+      <div class="p-5 sm:p-6 pt-3 sm:pt-4">
+        <h2 class="text-[20px] sm:text-[22px] font-bold text-white tracking-tight">
+          $500 Hobby Lobby Discount
+        </h2>
+        <p class="text-[13.5px] sm:text-sm text-[#a6b5ac] mt-1">
+          Hobby Lobby discount worth $500
+        </p>
+        <p class="text-[11px] sm:text-xs text-[#6e7f75] mt-2">
+          Terms and eligibility requirements apply.
+        </p>
+
+        <!-- Primary Redirect CTA Button -->
+        <a
+          href="https://giftclick.org/?offer_id=5034&aff_id=165890"
+          rel="noopener noreferrer"
+          class="cta-button mt-4 w-full py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 text-white font-bold text-[14px] sm:text-[15px] tracking-wider uppercase cursor-pointer"
+        >
+          <span>CONTINUE</span>
+          <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="mt-6 sm:mt-7">
+      <div class="flex items-center gap-1.5 mb-3 px-0.5">
+        <h3 class="text-[14px] sm:text-[15px] font-bold text-white tracking-tight">
+          How It Works
+        </h3>
+        <!-- Gift Box Icon -->
+        <span class="text-base leading-none" aria-hidden="true">🎁</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <!-- Step 1 -->
+        <div class="flex items-center justify-between gap-3 bg-[#0d1912]/90 border border-white/[0.08] rounded-xl p-3 sm:p-3.5 transition-colors hover:border-white/15">
+          <div class="flex items-center gap-3 min-w-0">
+            <!-- Left Icon Badge -->
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#142b1d] border border-[#234731] flex items-center justify-center shrink-0 text-[#52b77a]">
+              <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+              </svg>
+            </div>
+            <!-- Step Copy -->
+            <div class="min-w-0">
+              <p class="text-[13px] sm:text-[13.5px] font-semibold text-white leading-snug truncate">
+                Tap the button continue
+              </p>
+              <p class="text-[11px] sm:text-[11.5px] text-[#7c8d83] leading-snug truncate">
+                Click on the button above to get started
+              </p>
+            </div>
+          </div>
+          <!-- Right Step Number -->
+          <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#cf2436] text-white text-[11px] font-bold flex items-center justify-center shrink-0 shadow-sm">
+            1
+          </span>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex items-center justify-between gap-3 bg-[#0d1912]/90 border border-white/[0.08] rounded-xl p-3 sm:p-3.5 transition-colors hover:border-white/15">
+          <div class="flex items-center gap-3 min-w-0">
+            <!-- Left Icon Badge -->
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#142b1d] border border-[#234731] flex items-center justify-center shrink-0 text-[#52b77a]">
+              <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
+              </svg>
+            </div>
+            <!-- Step Copy -->
+            <div class="min-w-0">
+              <p class="text-[13px] sm:text-[13.5px] font-semibold text-white leading-snug truncate">
+                Enter your email address
+              </p>
+              <p class="text-[11px] sm:text-[11.5px] text-[#7c8d83] leading-snug truncate">
+                To receive your discount code on your email
+              </p>
+            </div>
+          </div>
+          <!-- Right Step Number -->
+          <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#cf2436] text-white text-[11px] font-bold flex items-center justify-center shrink-0 shadow-sm">
+            2
+          </span>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex items-center justify-between gap-3 bg-[#0d1912]/90 border border-white/[0.08] rounded-xl p-3 sm:p-3.5 transition-colors hover:border-white/15">
+          <div class="flex items-center gap-3 min-w-0">
+            <!-- Left Icon Badge -->
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#142b1d] border border-[#234731] flex items-center justify-center shrink-0 text-[#52b77a]">
+              <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            </div>
+            <!-- Step Copy -->
+            <div class="min-w-0">
+              <p class="text-[13px] sm:text-[13.5px] font-semibold text-white leading-snug truncate">
+                Complete 3–5 simple offers
+              </p>
+              <p class="text-[11px] sm:text-[11.5px] text-[#7c8d83] leading-snug truncate">
+                The more you do, the more you earn
+              </p>
+            </div>
+          </div>
+          <!-- Right Step Number -->
+          <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#cf2436] text-white text-[11px] font-bold flex items-center justify-center shrink-0 shadow-sm">
+            3
+          </span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Legal Footer -->
+  <footer class="w-full max-w-[430px] mx-auto pt-6 pb-2 text-center">
+    <nav aria-label="Legal links" class="flex items-center justify-center gap-2.5 text-[10.5px] sm:text-[11px] text-[#6d7e74]">
+      <button type="button" onclick="openLegalModal('Privacy Policy')" class="underline hover:text-gray-300 transition-colors cursor-pointer">
+        Privacy Policy
+      </button>
+      <span>•</span>
+      <button type="button" onclick="openLegalModal('Terms & Conditions')" class="underline hover:text-gray-300 transition-colors cursor-pointer">
+        Terms
+      </button>
+      <span>•</span>
+      <button type="button" onclick="openLegalModal('Affiliate Disclosure')" class="underline hover:text-gray-300 transition-colors cursor-pointer">
+        Affiliate Disclosure
+      </button>
+    </nav>
+  </footer>
+
+  <!-- Clean Legal Info Modal (Replaces alert() and keeps footer links functional) -->
+  <div id="legalModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="bg-[#0d1912] border border-white/15 rounded-2xl max-w-sm w-full p-5 text-left shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h4 id="modalTitle" class="text-base font-bold text-white">Legal Information</h4>
+        <button type="button" onclick="closeLegalModal()" class="text-gray-400 hover:text-white p-1 rounded-lg cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <p id="modalBody" class="text-xs text-[#9cb0a4] leading-relaxed mt-3"></p>
+      <button type="button" onclick="closeLegalModal()" class="mt-4 w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold transition-colors cursor-pointer">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Legal modal content handler
+    const legalTexts = {
+      'Privacy Policy': 'We respect your privacy. Information submitted on partner offer pages is governed by the respective advertiser privacy policies. We do not sell your personal data directly from this promotional page.',
+      'Terms & Conditions': 'Participation requires meeting all eligibility criteria and completing the required number of sponsor deals on the destination page. Rewards are subject to verification and availability.',
+      'Affiliate Disclosure': 'This page contains affiliate links. If you click through and complete qualifying sponsor offers, we may receive a referral commission at no extra cost to you. This promotion is independent and not directly sponsored or endorsed by Hobby Lobby.'
+    };
+
+    function openLegalModal(title) {
+      const modal = document.getElementById('legalModal');
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').textContent = legalTexts[title] || '';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLegalModal() {
+      const modal = document.getElementById('legalModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Close modal when clicking backdrop
+    document.getElementById('legalModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeLegalModal();
+      }
+    });
+
+    // Photorealistic Multi-Layer Studio Christmas Renderer (Background + Foreground Depth)
+    (function () {
+      const bgCanvas = document.getElementById('holidayCanvas');
+      const fgCanvas = document.getElementById('holidayForegroundCanvas');
+      if (!bgCanvas || !fgCanvas) return;
+      const bgCtx = bgCanvas.getContext('2d');
+      const fgCtx = fgCanvas.getContext('2d');
+
+      // Deterministic pseudo-random helper so rich textures stay crisp and consistent
+      function mulberry32(seed) {
+        return function () {
+          let t = (seed += 0x6d2b79f5);
+          t = Math.imul(t ^ (t >>> 15), t | 1);
+          t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      // Draw a realistic macro evergreen fir branch with hundreds of layered shaded needles & frost
+      function drawRealisticFirBranch(ctx, x1, y1, x2, y2, thickness, seed) {
+        const rand = mulberry32(seed);
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const len = Math.hypot(dx, dy);
+        const angle = Math.atan2(dy, dx);
+        const steps = Math.floor(len / 2.2);
+
+        ctx.save();
+        ctx.translate(x1, y1);
+        ctx.rotate(angle);
+
+        // Woody twig core
+        ctx.strokeStyle = '#29180d';
+        ctx.lineWidth = Math.max(1.5, thickness * 0.14);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(len, 0);
+        ctx.stroke();
+
+        // Layer 1: Deep dark ambient-occluded under-needles
+        for (let i = 0; i < steps; i++) {
+          const t = i / steps;
+          const bx = t * len;
+          const taper = Math.sin(Math.min(1, t * 1.15) * Math.PI * 0.85 + 0.15);
+          const needleLen = thickness * (0.55 + 0.55 * taper) * (0.85 + rand() * 0.3);
+
+          [-1, 1].forEach((side) => {
+            const spread = side * (0.52 + rand() * 0.32);
+            const nx = bx + Math.cos(spread) * needleLen;
+            const ny = Math.sin(spread) * needleLen;
+
+            ctx.strokeStyle = rand() > 0.4 ? '#041f11' : '#082f1b';
+            ctx.lineWidth = 2.1;
+            ctx.beginPath();
+            ctx.moveTo(bx, 0);
+            ctx.lineTo(nx, ny);
+            ctx.stroke();
+          });
+        }
+
+        // Layer 2: Mid-tone rich Noble Fir needles
+        for (let i = 0; i < steps; i++) {
+          const t = i / steps;
+          const bx = t * len;
+          const taper = Math.sin(Math.min(1, t * 1.15) * Math.PI * 0.85 + 0.15);
+          const needleLen = thickness * (0.48 + 0.5 * taper) * (0.85 + rand() * 0.3);
+
+          [-1, 1].forEach((side) => {
+            const spread = side * (0.42 + rand() * 0.28);
+            const nx = bx + Math.cos(spread) * needleLen;
+            const ny = Math.sin(spread) * needleLen;
+
+            ctx.strokeStyle = rand() > 0.45 ? '#0f4c2c' : '#16653b';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(bx, 0);
+            ctx.lineTo(nx, ny);
+            ctx.stroke();
+          });
+        }
+
+        // Layer 3: Warm golden-lit & snow-frosted needle tips
+        for (let i = 0; i < steps; i += 2) {
+          const t = i / steps;
+          const bx = t * len;
+          const taper = Math.sin(Math.min(1, t * 1.15) * Math.PI * 0.85 + 0.15);
+          const needleLen = thickness * (0.42 + 0.48 * taper);
+
+          [-1, 1].forEach((side) => {
+            const spread = side * (0.36 + rand() * 0.25);
+            const nx = bx + Math.cos(spread) * needleLen;
+            const ny = Math.sin(spread) * needleLen;
+            const isFrosted = rand() > 0.62;
+
+            ctx.strokeStyle = isFrosted
+              ? 'rgba(236, 253, 245, 0.65)'
+              : 'rgba(74, 168, 108, 0.72)';
+            ctx.lineWidth = 1.15;
+            ctx.beginPath();
+            ctx.moveTo(bx + Math.cos(spread) * (needleLen * 0.45), Math.sin(spread) * (needleLen * 0.45));
+            ctx.lineTo(nx, ny);
+            ctx.stroke();
+          });
+        }
+
+        ctx.restore();
+      }
+
+      // Photorealistic Glass Mirror Christmas Ornament with Environment Reflection & Metallic Crown
+      function drawGlassBauble(ctx, x, y, r, theme) {
+        ctx.save();
+
+        // Drop shadow
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.78)';
+        ctx.shadowBlur = r * 0.8;
+        ctx.shadowOffsetY = r * 0.28;
+
+        // Main Glass Sphere Gradient
+        const sphereGrad = ctx.createRadialGradient(
+          x - r * 0.34,
+          y - r * 0.36,
+          r * 0.05,
+          x,
+          y,
+          r
+        );
+        sphereGrad.addColorStop(0, theme.specular);
+        sphereGrad.addColorStop(0.22, theme.light);
+        sphereGrad.addColorStop(0.62, theme.mid);
+        sphereGrad.addColorStop(0.88, theme.dark);
+        sphereGrad.addColorStop(1, theme.rim);
+
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = sphereGrad;
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+
+        // Clip inside sphere for realistic room/lights reflection
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, r * 0.97, 0, Math.PI * 2);
+        ctx.clip();
+
+        // Warm rim bounce light at bottom-right
+        const bounceGrad = ctx.createRadialGradient(
+          x + r * 0.4,
+          y + r * 0.5,
+          r * 0.05,
+          x + r * 0.3,
+          y + r * 0.4,
+          r * 0.75
+        );
+        bounceGrad.addColorStop(0, theme.bounce);
+        bounceGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = bounceGrad;
+        ctx.fillRect(x - r, y - r, r * 2, r * 2);
+
+        // Curved Studio Window Softbox Reflection
+        ctx.save();
+        ctx.translate(x - r * 0.36, y - r * 0.36);
+        ctx.rotate(-Math.PI / 4);
+        const softbox = ctx.createLinearGradient(0, -r * 0.22, 0, r * 0.22);
+        softbox.addColorStop(0, 'rgba(255, 255, 255, 0.88)');
+        softbox.addColorStop(1, 'rgba(255, 255, 255, 0.12)');
+        ctx.fillStyle = softbox;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, r * 0.34, r * 0.17, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Secondary Warm Fairy-Light Reflection Dot
+        ctx.fillStyle = 'rgba(255, 244, 194, 0.75)';
+        ctx.beginPath();
+        ctx.arc(x + r * 0.42, y - r * 0.18, r * 0.09, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+
+        // Ribbed Gold Metal Cap & Wire Hanging Ring
+        const capW = r * 0.46;
+        const capH = r * 0.28;
+        const capGrad = ctx.createLinearGradient(x - capW / 2, 0, x + capW / 2, 0);
+        capGrad.addColorStop(0, '#784f14');
+        capGrad.addColorStop(0.35, '#fce588');
+        capGrad.addColorStop(0.7, '#d99b26');
+        capGrad.addColorStop(1, '#5c3a0b');
+        ctx.fillStyle = capGrad;
+        ctx.beginPath();
+        ctx.roundRect(x - capW / 2, y - r - capH * 0.72, capW, capH, 2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#f5d061';
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.arc(x, y - r - capH * 0.95, r * 0.14, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      // Realistic Frosted Pinecone with Overlapping Woody Scales
+      function drawPinecone(ctx, x, y, scale, angle) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.scale(scale, scale);
+        ctx.shadowColor = 'rgba(0,0,0,0.75)';
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetY = 4;
+
+        const rows = 5;
+        for (let row = 0; row < rows; row++) {
+          const yPos = -14 + row * 6.5;
+          const cols = row === 0 || row === rows - 1 ? 2 : 3;
+          const rowWidth = row === 0 ? 10 : row === 1 ? 18 : row === 2 ? 21 : row === 3 ? 17 : 11;
+
+          for (let c = 0; c < cols; c++) {
+            const xPos = cols === 1 ? 0 : -rowWidth / 2 + (c / (cols - 1)) * rowWidth;
+            const scaleGrad = ctx.createRadialGradient(xPos, yPos - 2, 1, xPos, yPos, 8);
+            scaleGrad.addColorStop(0, '#854d27');
+            scaleGrad.addColorStop(0.65, '#4a2511');
+            scaleGrad.addColorStop(1, '#261106');
+
+            ctx.fillStyle = scaleGrad;
+            ctx.beginPath();
+            ctx.ellipse(xPos, yPos, 5.5, 4.2, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Snow Frost Tip on Each Scale
+            ctx.fillStyle = 'rgba(248, 250, 252, 0.72)';
+            ctx.beginPath();
+            ctx.ellipse(xPos, yPos + 2.2, 3.8, 1.3, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        ctx.restore();
+      }
+
+      // Glossy Luxury Crimson Silk Satin Ribbon Bow (Top-Left Corner)
+      function drawLuxurySilkBow(ctx, cx, cy, scale) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.scale(scale, scale);
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+        ctx.shadowBlur = 14;
+        ctx.shadowOffsetY = 6;
+
+        // Flowing Silk Tails
+        const tailGrad = ctx.createLinearGradient(-35, 0, 45, 75);
+        tailGrad.addColorStop(0, '#7f101d');
+        tailGrad.addColorStop(0.45, '#dc2626');
+        tailGrad.addColorStop(0.75, '#991b1b');
+        tailGrad.addColorStop(1, '#580a12');
+
+        ctx.fillStyle = tailGrad;
+        ctx.beginPath();
+        ctx.moveTo(-4, 6);
+        ctx.quadraticCurveTo(-24, 34, -36, 72);
+        ctx.lineTo(-22, 66);
+        ctx.lineTo(-16, 76);
+        ctx.quadraticCurveTo(-8, 42, 4, 10);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(6, 6);
+        ctx.quadraticCurveTo(32, 32, 52, 64);
+        ctx.lineTo(38, 60);
+        ctx.lineTo(34, 72);
+        ctx.quadraticCurveTo(16, 40, 0, 10);
+        ctx.fill();
+
+        // Left & Right Sculpted Satin Loops with Specular Silk Folds
+        const drawLoop = (rot, w, h) => {
+          ctx.save();
+          ctx.rotate(rot);
+          const loopGrad = ctx.createLinearGradient(0, -h, w, h);
+          loopGrad.addColorStop(0, '#690c16');
+          loopGrad.addColorStop(0.32, '#ef4444');
+          loopGrad.addColorStop(0.52, '#fca5a5');
+          loopGrad.addColorStop(0.72, '#b91c1c');
+          loopGrad.addColorStop(1, '#5e0a13');
+
+          ctx.fillStyle = loopGrad;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.bezierCurveTo(w * 0.45, -h * 1.15, w * 1.15, -h * 0.75, w, 0);
+          ctx.bezierCurveTo(w * 1.15, h * 0.75, w * 0.45, h * 1.15, 0, 0);
+          ctx.fill();
+
+          // Inner Dark Crease Fold
+          ctx.strokeStyle = 'rgba(69, 6, 12, 0.65)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(4, 0);
+          ctx.quadraticCurveTo(w * 0.55, -2, w * 0.82, 0);
+          ctx.stroke();
+          ctx.restore();
+        };
+
+        drawLoop(-2.55, 48, 24);
+        drawLoop(-0.42, 50, 24);
+        drawLoop(2.45, 44, 21);
+        drawLoop(0.45, 46, 21);
+
+        // Center Gathered Silk Knot
+        const knotGrad = ctx.createRadialGradient(-3, -3, 1, 0, 0, 14);
+        knotGrad.addColorStop(0, '#f87171');
+        knotGrad.addColorStop(0.5, '#dc2626');
+        knotGrad.addColorStop(1, '#690c16');
+        ctx.fillStyle = knotGrad;
+        ctx.beginPath();
+        ctx.roundRect(-10, -9, 20, 18, 6);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // Warm Glowing Bokeh Fairy Light Bulb
+      function drawWarmFairyBulb(ctx, x, y, size) {
+        ctx.save();
+        const halo = ctx.createRadialGradient(x, y, 0.5, x, y, size * 5.2);
+        halo.addColorStop(0, 'rgba(255, 251, 235, 0.95)');
+        halo.addColorStop(0.22, 'rgba(253, 224, 71, 0.75)');
+        halo.addColorStop(0.55, 'rgba(245, 158, 11, 0.25)');
+        halo.addColorStop(1, 'rgba(245, 158, 11, 0)');
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(x, y, size * 5.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Red Holly Berry Cluster
+      function drawBerries(ctx, points) {
+        points.forEach(([bx, by, br]) => {
+          ctx.save();
+          ctx.shadowColor = 'rgba(0,0,0,0.65)';
+          ctx.shadowBlur = 4;
+          const bGrad = ctx.createRadialGradient(bx - br * 0.3, by - br * 0.3, 0.5, bx, by, br);
+          bGrad.addColorStop(0, '#fca5a5');
+          bGrad.addColorStop(0.3, '#ef4444');
+          bGrad.addColorStop(0.85, '#991b1b');
+          bGrad.addColorStop(1, '#450a0a');
+          ctx.fillStyle = bGrad;
+          ctx.beginPath();
+          ctx.arc(bx, by, br, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        });
+      }
+
+      // Luxury Wrapped Gift Box with Gold Silk Ribbon
+      function drawStudioGiftBox(ctx, x, y, w, h, rot, baseColors, ribbonColors) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rot);
+        ctx.shadowColor = 'rgba(0,0,0,0.82)';
+        ctx.shadowBlur = 12;
+        ctx.shadowOffsetY = 6;
+
+        const boxGrad = ctx.createLinearGradient(0, 0, w, h);
+        boxGrad.addColorStop(0, baseColors[0]);
+        boxGrad.addColorStop(0.6, baseColors[1]);
+        boxGrad.addColorStop(1, baseColors[2]);
+        ctx.fillStyle = boxGrad;
+        ctx.beginPath();
+        ctx.roundRect(0, 5, w, h - 5, 3);
+        ctx.fill();
+
+        // Lid with subtle overhang shadow
+        ctx.fillStyle = baseColors[0];
+        ctx.beginPath();
+        ctx.roundRect(-2, 0, w + 4, 9, 2);
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+
+        // Metallic Gold Ribbon
+        const ribGrad = ctx.createLinearGradient(0, 0, w, 0);
+        ribGrad.addColorStop(0, ribbonColors[0]);
+        ribGrad.addColorStop(0.5, ribbonColors[1]);
+        ribGrad.addColorStop(1, ribbonColors[0]);
+        ctx.fillStyle = ribGrad;
+        ctx.fillRect(w * 0.42, 0, w * 0.16, h);
+        ctx.fillRect(0, h * 0.46, w, h * 0.15);
+
+        ctx.restore();
+      }
+
+      function renderStudioChristmas() {
+        const rect = bgCanvas.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        [bgCanvas, fgCanvas].forEach((c) => {
+          c.width = rect.width * dpr;
+          c.height = rect.height * dpr;
+        });
+
+        bgCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        fgCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const w = rect.width;
+        const h = rect.height;
+
+        bgCtx.clearRect(0, 0, w, h);
+        fgCtx.clearRect(0, 0, w, h);
+
+        // 1. Deep Photographic Forest & Warm Candlelight Backdrop
+        const backdrop = bgCtx.createRadialGradient(w * 0.5, h * 0.48, 12, w * 0.5, h * 0.5, w * 0.65);
+        backdrop.addColorStop(0, '#1f4e32');
+        backdrop.addColorStop(0.48, '#0b2617');
+        backdrop.addColorStop(1, '#030c07');
+        bgCtx.fillStyle = backdrop;
+        bgCtx.fillRect(0, 0, w, h);
+
+        // Warm Golden Rim Halo Directly Behind the Gift Card
+        const cardHalo = bgCtx.createRadialGradient(w * 0.5, h * 0.48, 25, w * 0.5, h * 0.48, w * 0.44);
+        cardHalo.addColorStop(0, 'rgba(254, 215, 102, 0.42)');
+        cardHalo.addColorStop(0.55, 'rgba(217, 119, 6, 0.15)');
+        cardHalo.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        bgCtx.fillStyle = cardHalo;
+        bgCtx.fillRect(0, 0, w, h);
+
+        // 2. Out-of-Focus Photographic Golden Bokeh Lights in Background
+        const bokehList = [
+          [w * 0.27, h * 0.16, 22, 0.65],
+          [w * 0.42, h * 0.12, 16, 0.55],
+          [w * 0.58, h * 0.13, 18, 0.6],
+          [w * 0.73, h * 0.17, 24, 0.65],
+          [w * 0.15, h * 0.34, 19, 0.5],
+          [w * 0.85, h * 0.32, 20, 0.55],
+          [w * 0.22, h * 0.84, 24, 0.6],
+          [w * 0.78, h * 0.83, 25, 0.6],
+        ];
+        bokehList.forEach(([bx, by, br, alpha]) => {
+          const g = bgCtx.createRadialGradient(bx, by, 1, bx, by, br);
+          g.addColorStop(0, `rgba(255, 248, 220, ${alpha})`);
+          g.addColorStop(0.5, `rgba(245, 158, 11, ${alpha * 0.45})`);
+          g.addColorStop(1, 'rgba(245, 158, 11, 0)');
+          bgCtx.fillStyle = g;
+          bgCtx.beginPath();
+          bgCtx.arc(bx, by, br, 0, Math.PI * 2);
+          bgCtx.fill();
+        });
+
+        // 3. Dense Lush Evergreen Wreath & Pine Boughs Framing the Entire Perimeter
+        const branches = [
+          // Top perimeter branches
+          [-10, 12, w * 0.36, 38, 28, 101],
+          [w * 0.22, -6, w * 0.54, 42, 26, 102],
+          [w * 0.78, -6, w * 0.46, 42, 26, 103],
+          [w + 10, 12, w * 0.64, 38, 28, 104],
+          // Left side branches
+          [-12, 48, w * 0.24, 96, 30, 105],
+          [-14, 115, w * 0.23, 148, 30, 106],
+          [-10, 178, w * 0.26, 192, 28, 107],
+          // Right side branches
+          [w + 12, 48, w * 0.76, 96, 30, 108],
+          [w + 14, 115, w * 0.77, 148, 30, 109],
+          [w + 10, 178, w * 0.74, 192, 28, 110],
+          // Bottom perimeter branches
+          [-8, h - 8, w * 0.38, h - 34, 30, 111],
+          [w * 0.25, h + 6, w * 0.56, h - 32, 28, 112],
+          [w * 0.75, h + 6, w * 0.44, h - 32, 28, 113],
+          [w + 8, h - 8, w * 0.62, h - 34, 30, 114],
+        ];
+        branches.forEach(([x1, y1, x2, y2, thick, seed]) => {
+          drawRealisticFirBranch(bgCtx, x1, y1, x2, y2, thick, seed);
+        });
+
+        // 4. Frosted Pinecones Tucked Deep Into the Greenery
+        drawPinecone(bgCtx, w * 0.14, 112, 1.05, -0.45);
+        drawPinecone(bgCtx, w * 0.86, 74, 1.0, 0.5);
+        drawPinecone(bgCtx, w * 0.79, h - 34, 0.95, -0.35);
+        drawPinecone(bgCtx, w * 0.29, 26, 0.85, 0.3);
+
+        // 5. Luxury Wrapped Gift Boxes on Right & Left Lower Corners
+        const crimsonBox = ['#ef4444', '#b91c1c', '#7f1d1d'];
+        const emeraldBox = ['#10b981', '#047857', '#064e3b'];
+        const goldRibbon = ['#b45309', '#fde047'];
+
+        drawStudioGiftBox(bgCtx, w - 58, h - 98, 46, 42, -0.14, crimsonBox, goldRibbon);
+        drawStudioGiftBox(bgCtx, w - 48, h - 54, 42, 38, 0.08, crimsonBox, goldRibbon);
+        drawStudioGiftBox(bgCtx, 10, h - 56, 42, 38, -0.09, emeraldBox, goldRibbon);
+
+        // 6. Photorealistic Glass Mirror Christmas Ornaments
+        const crimsonGlass = {
+          specular: '#ffffff',
+          light: '#ff6b7a',
+          mid: '#dc143c',
+          dark: '#7a091e',
+          rim: '#3b020c',
+          bounce: 'rgba(255, 190, 130, 0.55)',
+        };
+        const goldGlass = {
+          specular: '#ffffff',
+          light: '#fef08a',
+          mid: '#eab308',
+          dark: '#854d0e',
+          rim: '#422006',
+          bounce: 'rgba(255, 250, 205, 0.6)',
+        };
+        const emeraldGlass = {
+          specular: '#ffffff',
+          light: '#6ee7b7',
+          mid: '#059669',
+          dark: '#064e3b',
+          rim: '#022c22',
+          bounce: 'rgba(167, 243, 208, 0.5)',
+        };
+
+        // Background & Midground Baubles
+        drawGlassBauble(bgCtx, w * 0.72, 22, 16, crimsonGlass);
+        drawGlassBauble(bgCtx, w * 0.13, 86, 15, goldGlass);
+        drawGlassBauble(bgCtx, w * 0.89, 108, 14, goldGlass);
+        drawGlassBauble(bgCtx, w * 0.35, 22, 11, emeraldGlass);
+        drawGlassBauble(bgCtx, w * 0.61, 20, 10, goldGlass);
+
+        // 7. Warm Glowing Fairy Light Bulbs Woven Through the Branches
+        const fairyLights = [
+          [w * 0.24, 34, 2.2],
+          [w * 0.39, 32, 2.0],
+          [w * 0.52, 35, 2.3],
+          [w * 0.65, 31, 2.1],
+          [w * 0.81, 44, 2.2],
+          [w * 0.17, 62, 2.1],
+          [w * 0.16, 142, 2.2],
+          [w * 0.84, 144, 2.2],
+          [w * 0.26, h - 32, 2.1],
+          [w * 0.54, h - 28, 2.2],
+          [w * 0.72, h - 32, 2.1],
+        ];
+        fairyLights.forEach(([lx, ly, ls]) => drawWarmFairyBulb(bgCtx, lx, ly, ls));
+
+        // 8. FOREGROUND LAYER (Overlaps Card Corners for Authentic 3D Studio Depth!)
+        // Top-left overlapping pine branch + Luxury Crimson Silk Satin Bow
+        drawRealisticFirBranch(fgCtx, -6, 6, w * 0.27, 46, 26, 201);
+        drawLuxurySilkBow(fgCtx, w * 0.16, 36, 0.92);
+
+        // Bottom-left large foreground glossy crimson ornament + holly berries
+        drawRealisticFirBranch(fgCtx, -4, h - 4, w * 0.28, h - 28, 25, 202);
+        drawGlassBauble(fgCtx, w * 0.16, h - 34, 21, crimsonGlass);
+        drawBerries(fgCtx, [
+          [w * 0.24, h - 22, 4.2],
+          [w * 0.265, h - 26, 3.8],
+          [w * 0.255, h - 16, 3.6],
+        ]);
+
+        // Bottom-right crimson silk ribbon sweep & foreground gold ornament
+        fgCtx.save();
+        fgCtx.shadowColor = 'rgba(0,0,0,0.75)';
+        fgCtx.shadowBlur = 10;
+        const sweepGrad = fgCtx.createLinearGradient(w * 0.34, h - 18, w * 0.74, h - 24);
+        sweepGrad.addColorStop(0, '#7f101d');
+        sweepGrad.addColorStop(0.35, '#ef4444');
+        sweepGrad.addColorStop(0.55, '#fca5a5');
+        sweepGrad.addColorStop(0.8, '#b91c1c');
+        sweepGrad.addColorStop(1, '#580a12');
+        fgCtx.strokeStyle = sweepGrad;
+        fgCtx.lineWidth = 11;
+        fgCtx.lineCap = 'round';
+        fgCtx.beginPath();
+        fgCtx.moveTo(w * 0.32, h - 14);
+        fgCtx.bezierCurveTo(w * 0.46, h - 32, w * 0.58, h - 12, w * 0.72, h - 26);
+        fgCtx.stroke();
+        fgCtx.restore();
+
+        drawRealisticFirBranch(fgCtx, w + 4, h - 6, w * 0.72, h - 26, 24, 203);
+        drawGlassBauble(fgCtx, w * 0.82, h - 24, 15, goldGlass);
+
+        // 9. Crisp Soft-Focus Snowflakes & Sparkle Dust Across Scene
+        const snowRand = mulberry32(999);
+        for (let s = 0; s < 34; s++) {
+          const sx = snowRand() * w;
+          const sy = snowRand() * h;
+          const sr = 0.9 + snowRand() * 1.6;
+          const targetCtx = s % 3 === 0 ? fgCtx : bgCtx;
+          targetCtx.fillStyle = `rgba(255, 255, 255, ${0.45 + snowRand() * 0.45})`;
+          targetCtx.beginPath();
+          targetCtx.arc(sx, sy, sr, 0, Math.PI * 2);
+          targetCtx.fill();
+        }
+      }
+
+      renderStudioChristmas();
+      window.addEventListener('resize', renderStudioChristmas);
+    })();
+  </script>
+</body>
+</html>
